@@ -22,6 +22,6 @@ import {
     UserService
   ]
 })
-export class SdkModule {
+export class LCYModule {
 
 }

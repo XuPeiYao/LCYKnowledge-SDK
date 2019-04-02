@@ -70,6 +70,29 @@ export class ArticleService {
     }
     
     /**
+     * 取得目前登入使用者的草稿
+     *
+     */
+    getCurrentDraftArticle(        ): Observable<Article> {
+        let url = '/api/Article/currentDraft';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<Article>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得文章列表分頁結果
      *
      * @param tags 標籤
@@ -96,7 +119,7 @@ export class ArticleService {
 
         state?: ('Audited' | 'Unaudited' | 'Reject' | 'Draft'),
 
-        order: ('Time_NewFirst' | 'Time_OldFirst')="Time_NewFirst",
+        order: ('Time_NewFirst' | 'Time_OldFirst' | 'CommitCount_MassFirst' | 'CommitCount_LessFirst')="Time_NewFirst",
 
         offset: number=0,
 
@@ -287,6 +310,52 @@ export class ArticleService {
     }
     
     /**
+     * 取得所有列表排序方法列表
+     *
+     */
+    getAllOrder(        ): Observable<ValueInfo[]> {
+        let url = '/api/Article/order/all';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<ValueInfo[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得所有StorageType列表
+     *
+     */
+    getAllStorageType(        ): Observable<ValueInfo[]> {
+        let url = '/api/Article/storageType/all';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<ValueInfo[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得所有文章格式類型列表
      *
      */
@@ -445,96 +514,13 @@ export class ArticleService {
 
         summaryLength: number=120,
 
-        order: ('Time_NewFirst' | 'Time_OldFirst')="Time_NewFirst",
+        order: ('Time_NewFirst' | 'Time_OldFirst' | 'CommitCount_MassFirst' | 'CommitCount_LessFirst')="Time_NewFirst",
 
         offset: number=0,
 
         limit: number=10
         ): Observable<PagingOfArticleWithUserState> {
         let url = '/api/Article/favorites';
-        const queryList = [];
-
-        if(tags !== null && tags !== undefined){
-            for(const item of tags){
-                if (item) {
-                    queryList.push('tags=' + encodeURIComponent((item).toString()));
-                }
-            }
-        }
-    
-        if (keyword !== null && keyword !== undefined) {
-            queryList.push('keyword=' + encodeURIComponent(keyword.toString()));
-        }
-    
-        if (startTime !== null && startTime !== undefined) {
-            queryList.push('startTime=' + encodeURIComponent(startTime.toString()));
-        }
-    
-        if (endTime !== null && endTime !== undefined) {
-            queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
-        }
-    
-        if (summaryLength !== null && summaryLength !== undefined) {
-            queryList.push('summaryLength=' + encodeURIComponent(summaryLength.toString()));
-        }
-    
-        if (order !== null && order !== undefined) {
-            queryList.push('order=' + encodeURIComponent(order.toString()));
-        }
-    
-        if (offset !== null && offset !== undefined) {
-            queryList.push('offset=' + encodeURIComponent(offset.toString()));
-        }
-    
-        if (limit !== null && limit !== undefined) {
-            queryList.push('limit=' + encodeURIComponent(limit.toString()));
-        }
-            window['lastRequestTime'] = new Date().getTime();
-        if(queryList.length > 0){
-            url += '?'+ queryList.join('&');
-        }
-
-        return this.http.get<PagingOfArticleWithUserState>(
-            url,
-            Config.defaultOptions
-        ).pipe(
-          catchError((error: any, caught: Observable<any>) => {
-            Config.onError.next({error: error, caught: caught});
-            return null;
-          })
-        );
-    }
-    
-    /**
-     * 取得訂閱分類的文章列表分頁結果
-     *
-     * @param tags 標籤
-     * @param keyword 關鍵字
-     * @param startTime 起始時間
-     * @param endTime 結束時間
-     * @param summaryLength 摘要長度
-     * @param order 排序
-     * @param offset 起始索引
-     * @param limit 取得筆數
-     */
-    listSubscribedCategoriesArticle(
-        tags?: string[],
-
-        keyword?: string,
-
-        startTime?: number,
-
-        endTime?: number,
-
-        summaryLength: number=120,
-
-        order: ('Time_NewFirst' | 'Time_OldFirst')="Time_NewFirst",
-
-        offset: number=0,
-
-        limit: number=10
-        ): Observable<PagingOfArticleWithUserState> {
-        let url = '/api/Article/subscribed';
         const queryList = [];
 
         if(tags !== null && tags !== undefined){

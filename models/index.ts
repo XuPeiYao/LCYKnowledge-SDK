@@ -1,6 +1,5 @@
 ﻿export * from './article';
 export * from './user';
-export * from './favorite';
 export * from './valueInfo';
 export * from './articleTagWithCount';
 export * from './pagingOfArticleWithUserState';

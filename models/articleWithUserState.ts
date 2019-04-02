@@ -2,8 +2,6 @@
 
 import { User } from './user';
 
-import { Favorite } from './favorite';
-
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';
@@ -37,7 +35,7 @@ import { AuthData } from './authData';
 import { LoginData } from './loginData';
 
 import { PagingOfUser } from './pagingOfUser';
-export class ArticleWithUserState {
+export class ArticleWithUserState extends Article{
 
     /**
      * 

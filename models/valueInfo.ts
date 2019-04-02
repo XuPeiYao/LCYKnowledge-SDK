@@ -2,8 +2,6 @@
 
 import { User } from './user';
 
-import { Favorite } from './favorite';
-
 import { ArticleTagWithCount } from './articleTagWithCount';
 
 import { PagingOfArticleWithUserState } from './pagingOfArticleWithUserState';

@@ -1,7 +1,5 @@
 ﻿import { User } from './user';
 
-import { Favorite } from './favorite';
-
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';
@@ -88,9 +86,4 @@ export class Article {
      * 
      */
     authorUser? : User;
-
-    /**
-     * 
-     */
-    favorite? : Favorite[];
 }

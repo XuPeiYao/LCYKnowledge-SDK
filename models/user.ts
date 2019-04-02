@@ -1,7 +1,5 @@
 ﻿import { Article } from './article';
 
-import { Favorite } from './favorite';
-
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';

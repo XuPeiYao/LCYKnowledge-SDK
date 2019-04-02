@@ -7,6 +7,7 @@ export * from './articleWithUserState';
 export * from './userBaseData';
 export * from './articleStorage';
 export * from './commit';
+export * from './commitStorage';
 export * from './pagingOfCommitWithScoreAndUserState';
 export * from './commitWithScoreAndUserState';
 export * from './commitWithScore';

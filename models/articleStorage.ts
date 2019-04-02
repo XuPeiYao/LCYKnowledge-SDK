@@ -14,6 +14,8 @@ import { UserBaseData } from './userBaseData';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';

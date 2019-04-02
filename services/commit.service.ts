@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -90,7 +90,7 @@ export class CommitService {
 
         state?: ('Blocked' | 'Publish'),
 
-        order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score')="Score",
+        order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score_HighFirst' | 'Score_LowFirst')="Score_HighFirst",
 
         offset: number=0,
 
@@ -273,6 +273,52 @@ export class CommitService {
     }
     
     /**
+     * 取得所有列表排序方法列表
+     *
+     */
+    getAllOrder(        ): Observable<ValueInfo[]> {
+        let url = '/api/Commit/order/all';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<ValueInfo[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得所有StorageType列表
+     *
+     */
+    getAllStorageType(        ): Observable<ValueInfo[]> {
+        let url = '/api/Commit/storageType/all';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<ValueInfo[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得所有回文格式類型列表
      *
      */
@@ -316,7 +362,7 @@ export class CommitService {
 
         state?: ('Blocked' | 'Publish'),
 
-        order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score')="Score",
+        order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score_HighFirst' | 'Score_LowFirst')="Score_HighFirst",
 
         offset: number=0,
 
@@ -506,6 +552,151 @@ export class CommitService {
         let url = '/api/Commit/{commitId}/score';
 
         url = url.replace('{commitId}', (commitId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.delete<void>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得指定回文的檔案列表
+     *
+     * @param commitId 回文唯一識別號
+     * @param type 類型過濾
+     */
+    listStorage(
+        commitId: number,
+
+        type?: string
+        ): Observable<CommitStorage[]> {
+        let url = '/api/Commit/{commitId}/storage';
+
+        url = url.replace('{commitId}', (commitId).toString());
+            const queryList = [];
+
+        if (type !== null && type !== undefined) {
+            queryList.push('type=' + encodeURIComponent(type.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<CommitStorage[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 上傳檔案至指定回文中
+     *
+     * @param commitId 回文唯一識別號
+     * @param type 類型
+     * @param files 檔案
+     */
+    addStorage(
+        commitId: number,
+
+        type?: string,
+
+        files?: File[]
+        ): Observable<CommitStorage[]> {
+        let url = '/api/Commit/{commitId}/storage';
+
+        url = url.replace('{commitId}', (commitId).toString());
+            const queryList = [];
+
+        if (type !== null && type !== undefined) {
+            queryList.push('type=' + encodeURIComponent(type.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        const formData = new FormData();
+
+        for(var item of files){
+            formData.append('files', item);
+        }
+                return this.http.post<CommitStorage[]>(
+            url,
+            formData,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得指定回文的指定檔案
+     *
+     * @param commitId 回文唯一識別號
+     * @param storageId 檔案唯一識別號
+     */
+    getStorage(
+        commitId: number,
+
+        storageId: string
+        ): Observable<CommitStorage> {
+        let url = '/api/Commit/{commitId}/storage/{storageId}';
+
+        url = url.replace('{commitId}', (commitId).toString());
+    
+        url = url.replace('{storageId}', (storageId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<CommitStorage>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 刪除指定回文中的指定檔案
+     *
+     * @param commitId 回文唯一識別號
+     * @param storageId 檔案唯一識別號
+     */
+    removeStorage(
+        commitId: number,
+
+        storageId: string
+        ): Observable<void> {
+        let url = '/api/Commit/{commitId}/storage/{storageId}';
+
+        url = url.replace('{commitId}', (commitId).toString());
+    
+        url = url.replace('{storageId}', (storageId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){

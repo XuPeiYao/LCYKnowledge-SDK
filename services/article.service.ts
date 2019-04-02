@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -70,7 +70,7 @@ export class ArticleService {
     }
     
     /**
-     * 取得目前登入使用者的草稿
+     * 取得目前登入使用者的草稿，前端發文可調用此方法產生或取得實例
      *
      */
     getCurrentDraftArticle(        ): Observable<Article> {
@@ -216,7 +216,7 @@ export class ArticleService {
     }
     
     /**
-     * 建立文章草稿
+     * 建立文章草稿，請改用GetCurrentDraftArticle()
      *
      * @param article 文章
      */
@@ -248,7 +248,7 @@ export class ArticleService {
     }
     
     /**
-     * 更新文章狀態
+     * 更新文章狀態，普通使用者可將狀態改為Unaudited即為待審核
      *
      * @param articleId 文章唯一識別號
      * @param state 狀態

@@ -14,6 +14,8 @@ import { UserBaseData } from './userBaseData';
 
 import { ArticleStorage } from './articleStorage';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -81,4 +83,9 @@ export class Commit {
      * 
      */
     actorUser? : User;
+
+    /**
+     * 
+     */
+    commitStorage? : CommitStorage[];
 }

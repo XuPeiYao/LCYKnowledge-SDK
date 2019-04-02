@@ -16,6 +16,8 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';

@@ -37,6 +37,8 @@ import { AuthData } from './authData';
 import { LoginData } from './loginData';
 
 import { PagingOfUser } from './pagingOfUser';
+
+import { UserLevelName } from './userLevelName';
 export class ArticleWithUserState extends Article{
 
     /**
@@ -48,4 +50,9 @@ export class ArticleWithUserState extends Article{
      * 
      */
     commitCount? : number;
+
+    /**
+     * 
+     */
+    pictureUrl? : string;
 }

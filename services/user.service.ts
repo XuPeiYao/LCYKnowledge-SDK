@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser, UserLevelName } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -138,14 +138,14 @@ export class UserService {
     /**
      * 判斷指定使用者是否存在
      *
-     * @param id 唯一識別號
+     * @param userId 唯一識別號
      */
     exists(
-        id: string
+        userId: string
         ): Observable<boolean> {
-        let url = '/api/User/{id}/exists';
+        let url = '/api/User/{userId}/exists';
 
-        url = url.replace('{id}', (id).toString());
+        url = url.replace('{userId}', (userId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -166,14 +166,14 @@ export class UserService {
     /**
      * 取得指定使用者
      *
-     * @param id 唯一識別號
+     * @param userId 唯一識別號
      */
     get(
-        id: string
+        userId: string
         ): Observable<User> {
-        let url = '/api/User/{id}';
+        let url = '/api/User/{userId}';
 
-        url = url.replace('{id}', (id).toString());
+        url = url.replace('{userId}', (userId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -194,14 +194,14 @@ export class UserService {
     /**
      * 刪除指定使用者
      *
-     * @param id 唯一識別號
+     * @param userId 唯一識別號
      */
     delete(
-        id: string
+        userId: string
         ): Observable<void> {
-        let url = '/api/User/{id}';
+        let url = '/api/User/{userId}';
 
-        url = url.replace('{id}', (id).toString());
+        url = url.replace('{userId}', (userId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -222,17 +222,17 @@ export class UserService {
     /**
      * 上傳使用者大頭照
      *
-     * @param id 
+     * @param userId 
      * @param files 
      */
     uploadAvatar(
-        id: string,
+        userId: string,
 
         files?: File[]
         ): Observable<string> {
-        let url = '/api/User/{id}/avatar';
+        let url = '/api/User/{userId}/avatar';
 
-        url = url.replace('{id}', (id).toString());
+        url = url.replace('{userId}', (userId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -247,6 +247,34 @@ export class UserService {
                 return this.http.post<string>(
             url,
             formData,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得指定使用者目前等級對應圖片
+     *
+     * @param userId 使用者唯一識別號
+     */
+    getUserLevelNameImage(
+        userId: string
+        ): Observable<Blob> {
+        let url = '/api/User/{userId}/levelImage';
+
+        url = url.replace('{userId}', (userId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<Blob>(
+            url,
             Config.defaultOptions
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {

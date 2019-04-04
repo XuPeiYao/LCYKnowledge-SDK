@@ -37,7 +37,14 @@ import { AuthData } from './authData';
 import { LoginData } from './loginData';
 
 import { PagingOfUser } from './pagingOfUser';
+
+import { UserLevelName } from './userLevelName';
 export class User {
+
+    /**
+     * 大頭照網址
+     */
+    pictureUrl? : string;
 
     /**
      * 

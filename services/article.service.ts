@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser, UserLevelName } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -599,6 +599,97 @@ export class ArticleService {
         }
 
         return this.http.get<UserBaseData[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得目前使用者文章列表分頁結果
+     *
+     * @param tags 標籤
+     * @param keyword 關鍵字
+     * @param startTime 起始時間
+     * @param endTime 結束時間
+     * @param summaryLength 摘要長度
+     * @param state 狀態
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
+     * @param order 排序
+     * @param offset 起始索引
+     * @param limit 取得筆數
+     */
+    listMyArticle(
+        tags?: string[],
+
+        keyword?: string,
+
+        startTime?: number,
+
+        endTime?: number,
+
+        summaryLength: number=120,
+
+        state?: ('Audited' | 'Unaudited' | 'Reject' | 'Draft'),
+
+        order: ('Time_NewFirst' | 'Time_OldFirst' | 'CommitCount_MassFirst' | 'CommitCount_LessFirst')="Time_NewFirst",
+
+        offset: number=0,
+
+        limit: number=10
+        ): Observable<PagingOfArticleWithUserState> {
+        let url = '/api/Article/my';
+        const queryList = [];
+
+        if(tags !== null && tags !== undefined){
+            for(const item of tags){
+                if (item) {
+                    queryList.push('tags=' + encodeURIComponent((item).toString()));
+                }
+            }
+        }
+    
+        if (keyword !== null && keyword !== undefined) {
+            queryList.push('keyword=' + encodeURIComponent(keyword.toString()));
+        }
+    
+        if (startTime !== null && startTime !== undefined) {
+            queryList.push('startTime=' + encodeURIComponent(startTime.toString()));
+        }
+    
+        if (endTime !== null && endTime !== undefined) {
+            queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
+        }
+    
+        if (summaryLength !== null && summaryLength !== undefined) {
+            queryList.push('summaryLength=' + encodeURIComponent(summaryLength.toString()));
+        }
+    
+        if (state !== null && state !== undefined) {
+            queryList.push('state=' + encodeURIComponent(state.toString()));
+        }
+    
+        if (order !== null && order !== undefined) {
+            queryList.push('order=' + encodeURIComponent(order.toString()));
+        }
+    
+        if (offset !== null && offset !== undefined) {
+            queryList.push('offset=' + encodeURIComponent(offset.toString()));
+        }
+    
+        if (limit !== null && limit !== undefined) {
+            queryList.push('limit=' + encodeURIComponent(limit.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<PagingOfArticleWithUserState>(
             url,
             Config.defaultOptions
         ).pipe(

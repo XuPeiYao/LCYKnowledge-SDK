@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser, UserLevelName } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -70,13 +70,41 @@ export class CommitService {
     }
     
     /**
+     * 取得目前登入使用者的草稿，前端發起回文可調用此方法產生或取得實例
+     *
+     * @param articleId 文章唯一識別號
+     */
+    getCurrentDraftCommit(
+        articleId: number
+        ): Observable<Commit> {
+        let url = '/api/Commit/currentDraft/{articleId}';
+
+        url = url.replace('{articleId}', (articleId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<Commit>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得回覆列表分頁結果
      *
      * @param articleIds 文章唯一識別號
      * @param startTime 起始時間
      * @param endTime 結束時間
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
-<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr></tbody></table>
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      * @param order 排序
      * @param offset 起始索引
      * @param limit 取得筆數
@@ -88,7 +116,7 @@ export class CommitService {
 
         endTime?: number,
 
-        state?: ('Blocked' | 'Publish'),
+        state?: ('Blocked' | 'Publish' | 'Draft'),
 
         order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score_HighFirst' | 'Score_LowFirst')="Score_HighFirst",
 
@@ -179,7 +207,7 @@ export class CommitService {
     }
     
     /**
-     * 建立回覆
+     * 建立回覆，請改用GetCurrentDraftCommit()
      *
      * @param commit 回覆
      */
@@ -348,7 +376,7 @@ export class CommitService {
      * @param startTime 起始時間
      * @param endTime 結束時間
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
-<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr></tbody></table>
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      * @param order 排序
      * @param offset 起始索引
      * @param limit 取得筆數
@@ -360,7 +388,7 @@ export class CommitService {
 
         endTime?: number,
 
-        state?: ('Blocked' | 'Publish'),
+        state?: ('Blocked' | 'Publish' | 'Draft'),
 
         order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score_HighFirst' | 'Score_LowFirst')="Score_HighFirst",
 

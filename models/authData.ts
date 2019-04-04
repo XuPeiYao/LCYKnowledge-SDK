@@ -37,6 +37,8 @@ import { UserAssignRole } from './userAssignRole';
 import { LoginData } from './loginData';
 
 import { PagingOfUser } from './pagingOfUser';
+
+import { UserLevelName } from './userLevelName';
 export class AuthData {
 
     /**

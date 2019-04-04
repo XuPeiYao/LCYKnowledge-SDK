@@ -19,3 +19,4 @@ export * from './userAssignRole';
 export * from './authData';
 export * from './loginData';
 export * from './pagingOfUser';
+export * from './userLevelName';

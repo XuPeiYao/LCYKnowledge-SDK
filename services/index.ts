@@ -4,3 +4,4 @@ export * from './login.service';
 export * from './role.service';
 export * from './session.service';
 export * from './user.service';
+export * from './userLevelName.service';

@@ -16,6 +16,8 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -37,9 +39,12 @@ import { AuthData } from './authData';
 import { LoginData } from './loginData';
 
 import { PagingOfUser } from './pagingOfUser';
+export class UserLevelName {
 
-import { UserLevelName } from './userLevelName';
-export class CommitStorage {
+    /**
+     * 網址
+     */
+    url? : string;
 
     /**
      * 
@@ -49,35 +54,15 @@ export class CommitStorage {
     /**
      * 
      */
-    commitId? : number;
+    name? : string;
 
     /**
      * 
      */
-    fileName? : string;
+    score? : number;
 
     /**
      * 
      */
     objectName? : string;
-
-    /**
-     * 
-     */
-    type? : string;
-
-    /**
-     * 
-     */
-    time? : number;
-
-    /**
-     * 
-     */
-    size? : number;
-
-    /**
-     * 網址
-     */
-    url? : string;
 }

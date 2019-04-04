@@ -164,6 +164,29 @@ export class UserService {
     }
     
     /**
+     * 取得目前使用者資訊
+     *
+     */
+    getCurrentUser(        ): Observable<User> {
+        let url = '/api/User/current';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<User>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得指定使用者
      *
      * @param userId 唯一識別號
@@ -247,34 +270,6 @@ export class UserService {
                 return this.http.post<string>(
             url,
             formData,
-            Config.defaultOptions
-        ).pipe(
-          catchError((error: any, caught: Observable<any>) => {
-            Config.onError.next({error: error, caught: caught});
-            return null;
-          })
-        );
-    }
-    
-    /**
-     * 取得指定使用者目前等級對應圖片
-     *
-     * @param userId 使用者唯一識別號
-     */
-    getUserLevelNameImage(
-        userId: string
-        ): Observable<Blob> {
-        let url = '/api/User/{userId}/levelImage';
-
-        url = url.replace('{userId}', (userId).toString());
-            const queryList = [];
-        window['lastRequestTime'] = new Date().getTime();
-        if(queryList.length > 0){
-            url += '?'+ queryList.join('&');
-        }
-
-        return this.http.get<Blob>(
-            url,
             Config.defaultOptions
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {

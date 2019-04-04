@@ -47,6 +47,11 @@ export class User {
     pictureUrl? : string;
 
     /**
+     * 稱號圖片網址
+     */
+    levelImageUrl? : string;
+
+    /**
      * 
      */
     id? : string;

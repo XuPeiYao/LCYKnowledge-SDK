@@ -1,4 +1,4 @@
 ﻿export * from './services';
 export * from './models';
 export * from './config';
-export * from './sdk.module';
+export * from './lCY.module';

@@ -16,6 +16,8 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -27,8 +29,6 @@ import { CommitScoreCount } from './commitScoreCount';
 import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
-
-import { News } from './news';
 
 import { NewsStorage } from './newsStorage';
 
@@ -47,45 +47,45 @@ import { LoginData } from './loginData';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class CommitStorage {
+export class News {
 
     /**
      * 
      */
-    id? : string;
+    id? : number;
 
     /**
      * 
      */
-    commitId? : number;
+    title? : string;
 
     /**
      * 
      */
-    fileName? : string;
+    contentType? : string;
 
     /**
      * 
      */
-    objectName? : string;
+    content? : string;
 
     /**
      * 
      */
-    type? : string;
+    createTime? : number;
 
     /**
      * 
      */
-    time? : number;
+    modifyTime? : number;
 
     /**
      * 
      */
-    size? : number;
+    enable? : boolean;
 
     /**
-     * 網址
+     * 
      */
-    url? : string;
+    newsStorage? : NewsStorage[];
 }

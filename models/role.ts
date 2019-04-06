@@ -30,6 +30,14 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
+import { NewsStorage } from './newsStorage';
+
+import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
+
+import { NewsWithPicture } from './newsWithPicture';
+
 import { UserAssignRole } from './userAssignRole';
 
 import { AuthData } from './authData';

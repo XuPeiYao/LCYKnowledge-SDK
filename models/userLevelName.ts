@@ -30,6 +30,14 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
+import { NewsStorage } from './newsStorage';
+
+import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
+
+import { NewsWithPicture } from './newsWithPicture';
+
 import { Role } from './role';
 
 import { UserAssignRole } from './userAssignRole';
@@ -65,4 +73,14 @@ export class UserLevelName {
      * 
      */
     objectName? : string;
+
+    /**
+     * 
+     */
+    borderColor? : string;
+
+    /**
+     * 
+     */
+    isStar? : boolean;
 }

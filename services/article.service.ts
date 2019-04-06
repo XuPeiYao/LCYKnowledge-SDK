@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, Role, UserAssignRole, AuthData, LoginData, PagingOfUser, UserLevelName } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, News, NewsStorage, PagingOfNewsWithPicture, NewsWithPicture, Role, UserAssignRole, AuthData, LoginData, PagingOfUser, UserLevelName } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -484,7 +484,7 @@ export class ArticleService {
 
         endTime?: number,
 
-        state?: ('Audited' | 'Unaudited' | 'Reject' | 'Draft')
+        state: ('Audited' | 'Unaudited' | 'Reject' | 'Draft')="Audited"
         ): Observable<ArticleTagWithCount[]> {
         let url = '/api/Article/tags';
         const queryList = [];
@@ -503,6 +503,50 @@ export class ArticleService {
     
         if (state !== null && state !== undefined) {
             queryList.push('state=' + encodeURIComponent(state.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<ArticleTagWithCount[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得收藏文章作用中的標籤與使用次數資訊
+     *
+     * @param keyword 關鍵字
+     * @param startTime 起始時間
+     * @param endTime 結束時間
+     */
+    listFavoriteTags(
+        keyword?: string,
+
+        startTime?: number,
+
+        endTime?: number
+        ): Observable<ArticleTagWithCount[]> {
+        let url = '/api/Article/favorites/tags';
+        const queryList = [];
+
+        if (keyword !== null && keyword !== undefined) {
+            queryList.push('keyword=' + encodeURIComponent(keyword.toString()));
+        }
+    
+        if (startTime !== null && startTime !== undefined) {
+            queryList.push('startTime=' + encodeURIComponent(startTime.toString()));
+        }
+    
+        if (endTime !== null && endTime !== undefined) {
+            queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
         }
             window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){

@@ -16,6 +16,8 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -29,8 +31,6 @@ import { PagingOfLogin } from './pagingOfLogin';
 import { Login } from './login';
 
 import { News } from './news';
-
-import { NewsStorage } from './newsStorage';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
@@ -47,7 +47,7 @@ import { LoginData } from './loginData';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class CommitStorage {
+export class NewsStorage {
 
     /**
      * 
@@ -57,7 +57,7 @@ export class CommitStorage {
     /**
      * 
      */
-    commitId? : number;
+    newsId? : number;
 
     /**
      * 

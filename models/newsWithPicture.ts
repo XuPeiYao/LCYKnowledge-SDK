@@ -16,6 +16,8 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
+import { CommitStorage } from './commitStorage';
+
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -34,8 +36,6 @@ import { NewsStorage } from './newsStorage';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
-import { NewsWithPicture } from './newsWithPicture';
-
 import { Role } from './role';
 
 import { UserAssignRole } from './userAssignRole';
@@ -47,45 +47,10 @@ import { LoginData } from './loginData';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class CommitStorage {
+export class NewsWithPicture extends News{
 
     /**
      * 
      */
-    id? : string;
-
-    /**
-     * 
-     */
-    commitId? : number;
-
-    /**
-     * 
-     */
-    fileName? : string;
-
-    /**
-     * 
-     */
-    objectName? : string;
-
-    /**
-     * 
-     */
-    type? : string;
-
-    /**
-     * 
-     */
-    time? : number;
-
-    /**
-     * 
-     */
-    size? : number;
-
-    /**
-     * 網址
-     */
-    url? : string;
+    pictureUrl? : string;
 }

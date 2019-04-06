@@ -28,6 +28,14 @@ import { CommitScoreCount } from './commitScoreCount';
 
 import { PagingOfLogin } from './pagingOfLogin';
 
+import { News } from './news';
+
+import { NewsStorage } from './newsStorage';
+
+import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
+
+import { NewsWithPicture } from './newsWithPicture';
+
 import { Role } from './role';
 
 import { UserAssignRole } from './userAssignRole';

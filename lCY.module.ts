@@ -5,9 +5,11 @@ import {
     ArticleService,
     CommitService,
     LoginService,
+    NewsService,
     RoleService,
     SessionService,
-    UserService
+    UserService,
+    UserLevelNameService
 } from './services';
 
 @NgModule({
@@ -17,9 +19,11 @@ import {
     ArticleService,
     CommitService,
     LoginService,
+    NewsService,
     RoleService,
     SessionService,
-    UserService
+    UserService,
+    UserLevelNameService
   ]
 })
 export class LCYModule {

@@ -1,5 +1,9 @@
 ﻿import { User } from './user';
 
+import { News } from './news';
+
+import { NewsStorage } from './newsStorage';
+
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';
@@ -27,10 +31,6 @@ import { CommitScoreCount } from './commitScoreCount';
 import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
-
-import { News } from './news';
-
-import { NewsStorage } from './newsStorage';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 

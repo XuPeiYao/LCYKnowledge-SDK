@@ -1,5 +1,7 @@
 ﻿export * from './article';
 export * from './user';
+export * from './news';
+export * from './newsStorage';
 export * from './valueInfo';
 export * from './articleTagWithCount';
 export * from './pagingOfArticleWithUserState';
@@ -14,8 +16,6 @@ export * from './commitWithScore';
 export * from './commitScoreCount';
 export * from './pagingOfLogin';
 export * from './login';
-export * from './news';
-export * from './newsStorage';
 export * from './pagingOfNewsWithPicture';
 export * from './newsWithPicture';
 export * from './role';

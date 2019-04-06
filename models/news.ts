@@ -2,6 +2,8 @@
 
 import { User } from './user';
 
+import { NewsStorage } from './newsStorage';
+
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';
@@ -29,8 +31,6 @@ import { CommitScoreCount } from './commitScoreCount';
 import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
-
-import { NewsStorage } from './newsStorage';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
@@ -83,6 +83,16 @@ export class News {
      * 
      */
     enable? : boolean;
+
+    /**
+     * 
+     */
+    authorUserId? : string;
+
+    /**
+     * 
+     */
+    authorUser? : User;
 
     /**
      * 

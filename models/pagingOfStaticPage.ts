@@ -30,6 +30,8 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
 import { NewsWithPicture } from './newsWithPicture';
@@ -46,57 +48,50 @@ import { LoginData } from './loginData';
 
 import { StaticPage } from './staticPage';
 
-import { PagingOfStaticPage } from './pagingOfStaticPage';
-
 import { StaticPageStorage } from './staticPageStorage';
 
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class News {
+export class PagingOfStaticPage {
 
     /**
      * 
      */
-    id? : number;
+    skip? : number;
 
     /**
      * 
      */
-    title? : string;
+    take? : number;
 
     /**
      * 
      */
-    contentType? : string;
+    totalCount? : number;
 
     /**
      * 
      */
-    content? : string;
+    currentPageIndex? : number;
 
     /**
      * 
      */
-    createTime? : number;
+    totalPageCount? : number;
 
     /**
      * 
      */
-    modifyTime? : number;
+    hasPreviousPage? : boolean;
 
     /**
      * 
      */
-    enable? : boolean;
+    hasNextPage? : boolean;
 
     /**
      * 
      */
-    authorUserId? : string;
-
-    /**
-     * 
-     */
-    authorUser? : User;
+    result? : StaticPage[];
 }

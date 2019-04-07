@@ -9,28 +9,28 @@ import clone from 'clone';
 @Injectable({
   providedIn: 'root'
 })
-export class NewsService {
+export class StaticPageService {
     constructor(private http: HttpClient) {}
 
 
     /**
-     * 取得指定最新消息
+     * 取得指定靜態頁
      *
-     * @param newsId 最新消息唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      */
     get(
-        newsId: number
-        ): Observable<News> {
-        let url = '/api/News/{newsId}';
+        staticPageId: string
+        ): Observable<StaticPage> {
+        let url = '/api/StaticPage/{staticPageId}';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<News>(
+        return this.http.get<StaticPage>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -42,16 +42,16 @@ export class NewsService {
     }
     
     /**
-     * 刪除最新消息
+     * 刪除靜態頁
      *
-     * @param newsId 文章唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      */
     delete(
-        newsId: number
+        staticPageId: string
         ): Observable<void> {
-        let url = '/api/News/{newsId}';
+        let url = '/api/StaticPage/{staticPageId}';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -70,11 +70,9 @@ export class NewsService {
     }
     
     /**
-     * 取得最新消息列表分頁結果
+     * 取得靜態頁列表分頁結果
      *
      * @param keyword 關鍵字
-     * @param startTime 起始時間
-     * @param endTime 結束時間
      * @param summaryLength 摘要長度
      * @param enable 
      * @param offset 起始索引
@@ -83,10 +81,6 @@ export class NewsService {
     listNews(
         keyword?: string,
 
-        startTime?: number,
-
-        endTime?: number,
-
         summaryLength: number=120,
 
         enable: boolean=true,
@@ -94,20 +88,12 @@ export class NewsService {
         offset: number=0,
 
         limit: number=10
-        ): Observable<PagingOfNewsWithPicture> {
-        let url = '/api/News';
+        ): Observable<PagingOfStaticPage> {
+        let url = '/api/StaticPage';
         const queryList = [];
 
         if (keyword !== null && keyword !== undefined) {
             queryList.push('keyword=' + encodeURIComponent(keyword.toString()));
-        }
-    
-        if (startTime !== null && startTime !== undefined) {
-            queryList.push('startTime=' + encodeURIComponent(startTime.toString()));
-        }
-    
-        if (endTime !== null && endTime !== undefined) {
-            queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
         }
     
         if (summaryLength !== null && summaryLength !== undefined) {
@@ -130,7 +116,7 @@ export class NewsService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<PagingOfNewsWithPicture>(
+        return this.http.get<PagingOfStaticPage>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -142,14 +128,14 @@ export class NewsService {
     }
     
     /**
-     * 更新最新消息
+     * 更新靜態頁
      *
-     * @param news 最新消息
+     * @param staticPage 靜態頁
      */
     update(
-        news: News
-        ): Observable<News> {
-        let url = '/api/News';
+        staticPage: StaticPage
+        ): Observable<StaticPage> {
+        let url = '/api/StaticPage';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -159,10 +145,10 @@ export class NewsService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.put<News>(
+        return this.http.put<StaticPage>(
             url,
 			
-            news
+            staticPage
 			,
             tmpOptions
         ).pipe(
@@ -174,14 +160,14 @@ export class NewsService {
     }
     
     /**
-     * 建立最新消息
+     * 建立靜態頁
      *
-     * @param news 最新消息
+     * @param staticPage 靜態頁
      */
     create(
-        news: News
-        ): Observable<News> {
-        let url = '/api/News';
+        staticPage: StaticPage
+        ): Observable<StaticPage> {
+        let url = '/api/StaticPage';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -191,10 +177,10 @@ export class NewsService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.post<News>(
+        return this.http.post<StaticPage>(
             url,
 			
-            news
+            staticPage
 			,
             tmpOptions
         ).pipe(
@@ -210,7 +196,7 @@ export class NewsService {
      *
      */
     getAllStorageType(        ): Observable<ValueInfo[]> {
-        let url = '/api/News/storageType/all';
+        let url = '/api/StaticPage/storageType/all';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -233,7 +219,7 @@ export class NewsService {
      *
      */
     getAllContentTypes(        ): Observable<ValueInfo[]> {
-        let url = '/api/News/contentType/all';
+        let url = '/api/StaticPage/contentType/all';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
@@ -252,19 +238,19 @@ export class NewsService {
     }
     
     /**
-     * 取得指定最新消息的檔案列表
+     * 取得指定靜態頁的檔案列表
      *
-     * @param newsId 最新消息唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      * @param type 類型過濾
      */
     listStorage(
-        newsId: number,
+        staticPageId: string,
 
         type?: string
-        ): Observable<NewsStorage[]> {
-        let url = '/api/News/{newsId}/storage';
+        ): Observable<StaticPageStorage[]> {
+        let url = '/api/StaticPage/{staticPageId}/storage';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
             const queryList = [];
 
         if (type !== null && type !== undefined) {
@@ -275,7 +261,7 @@ export class NewsService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<NewsStorage[]>(
+        return this.http.get<StaticPageStorage[]>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -287,22 +273,22 @@ export class NewsService {
     }
     
     /**
-     * 上傳檔案至指定最新消息中
+     * 上傳檔案至指定靜態頁中
      *
-     * @param newsId 最新消息唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      * @param type 類型
      * @param files 檔案
      */
     addStorage(
-        newsId: number,
+        staticPageId: string,
 
         type?: string,
 
         files?: File[]
-        ): Observable<NewsStorage[]> {
-        let url = '/api/News/{newsId}/storage';
+        ): Observable<StaticPageStorage[]> {
+        let url = '/api/StaticPage/{staticPageId}/storage';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
             const queryList = [];
 
         if (type !== null && type !== undefined) {
@@ -318,7 +304,7 @@ export class NewsService {
         for(var item of files){
             formData.append('files', item);
         }
-                return this.http.post<NewsStorage[]>(
+                return this.http.post<StaticPageStorage[]>(
             url,
             formData,
             Config.defaultOptions
@@ -331,19 +317,19 @@ export class NewsService {
     }
     
     /**
-     * 取得指定最新消息的指定檔案
+     * 取得指定靜態頁的指定檔案
      *
-     * @param newsId 最新消息唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      * @param storageId 檔案唯一識別號
      */
     getStorage(
-        newsId: number,
+        staticPageId: string,
 
         storageId: string
-        ): Observable<NewsStorage> {
-        let url = '/api/News/{newsId}/storage/{storageId}';
+        ): Observable<StaticPageStorage> {
+        let url = '/api/StaticPage/{staticPageId}/storage/{storageId}';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
     
         url = url.replace('{storageId}', (storageId).toString());
             const queryList = [];
@@ -352,7 +338,7 @@ export class NewsService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<NewsStorage>(
+        return this.http.get<StaticPageStorage>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -364,19 +350,19 @@ export class NewsService {
     }
     
     /**
-     * 刪除指定最新消息中的指定檔案
+     * 刪除指定靜態頁中的指定檔案
      *
-     * @param newsId 最新消息唯一識別號
+     * @param staticPageId 靜態頁唯一識別號
      * @param storageId 檔案唯一識別號
      */
     removeStorage(
-        newsId: number,
+        staticPageId: string,
 
         storageId: string
         ): Observable<void> {
-        let url = '/api/News/{newsId}/storage/{storageId}';
+        let url = '/api/StaticPage/{staticPageId}/storage/{storageId}';
 
-        url = url.replace('{newsId}', (newsId).toString());
+        url = url.replace('{staticPageId}', (staticPageId).toString());
     
         url = url.replace('{storageId}', (storageId).toString());
             const queryList = [];

@@ -8,6 +8,7 @@ import {
     NewsService,
     RoleService,
     SessionService,
+    StaticPageService,
     UserService,
     UserLevelNameService
 } from './services';
@@ -22,6 +23,7 @@ import {
     NewsService,
     RoleService,
     SessionService,
+    StaticPageService,
     UserService,
     UserLevelNameService
   ]

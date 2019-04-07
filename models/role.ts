@@ -2,10 +2,6 @@
 
 import { User } from './user';
 
-import { News } from './news';
-
-import { NewsStorage } from './newsStorage';
-
 import { ValueInfo } from './valueInfo';
 
 import { ArticleTagWithCount } from './articleTagWithCount';
@@ -34,15 +30,25 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
 import { NewsWithPicture } from './newsWithPicture';
+
+import { NewsStorage } from './newsStorage';
 
 import { UserAssignRole } from './userAssignRole';
 
 import { AuthData } from './authData';
 
 import { LoginData } from './loginData';
+
+import { StaticPage } from './staticPage';
+
+import { PagingOfStaticPage } from './pagingOfStaticPage';
+
+import { StaticPageStorage } from './staticPageStorage';
 
 import { PagingOfUser } from './pagingOfUser';
 

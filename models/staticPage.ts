@@ -30,6 +30,8 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
 import { NewsWithPicture } from './newsWithPicture';
@@ -44,8 +46,6 @@ import { AuthData } from './authData';
 
 import { LoginData } from './loginData';
 
-import { StaticPage } from './staticPage';
-
 import { PagingOfStaticPage } from './pagingOfStaticPage';
 
 import { StaticPageStorage } from './staticPageStorage';
@@ -53,12 +53,12 @@ import { StaticPageStorage } from './staticPageStorage';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class News {
+export class StaticPage {
 
     /**
      * 
      */
-    id? : number;
+    id? : string;
 
     /**
      * 
@@ -89,14 +89,4 @@ export class News {
      * 
      */
     enable? : boolean;
-
-    /**
-     * 
-     */
-    authorUserId? : string;
-
-    /**
-     * 
-     */
-    authorUser? : User;
 }

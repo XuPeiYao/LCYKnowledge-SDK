@@ -30,6 +30,8 @@ import { PagingOfLogin } from './pagingOfLogin';
 
 import { Login } from './login';
 
+import { News } from './news';
+
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
 import { NewsWithPicture } from './newsWithPicture';
@@ -48,55 +50,48 @@ import { StaticPage } from './staticPage';
 
 import { PagingOfStaticPage } from './pagingOfStaticPage';
 
-import { StaticPageStorage } from './staticPageStorage';
-
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class News {
+export class StaticPageStorage {
+
+    /**
+     * 網址
+     */
+    url? : string;
 
     /**
      * 
      */
-    id? : number;
+    id? : string;
 
     /**
      * 
      */
-    title? : string;
+    staticPageId? : string;
 
     /**
      * 
      */
-    contentType? : string;
+    fileName? : string;
 
     /**
      * 
      */
-    content? : string;
+    objectName? : string;
 
     /**
      * 
      */
-    createTime? : number;
+    type? : string;
 
     /**
      * 
      */
-    modifyTime? : number;
+    time? : number;
 
     /**
      * 
      */
-    enable? : boolean;
-
-    /**
-     * 
-     */
-    authorUserId? : string;
-
-    /**
-     * 
-     */
-    authorUser? : User;
+    size? : number;
 }

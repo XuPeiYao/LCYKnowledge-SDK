@@ -450,18 +450,13 @@ export class CommitService {
      * 取得指定回覆目前獲得回覆成績細節
      *
      * @param commitId 回覆唯一識別號
-     * @param articleId 
      */
     getScoreDetail(
-        commitId: number,
-
-        articleId: string
+        commitId: number
         ): Observable<CommitScoreCount[]> {
-        let url = '/api/Commit/{articleId}/score/detail';
+        let url = '/api/Commit/{commitId}/score/detail';
 
         url = url.replace('{commitId}', (commitId).toString());
-    
-        url = url.replace('{articleId}', (articleId).toString());
             const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){

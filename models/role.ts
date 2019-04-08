@@ -38,6 +38,10 @@ import { NewsWithPicture } from './newsWithPicture';
 
 import { NewsStorage } from './newsStorage';
 
+import { PagingOfNotice } from './pagingOfNotice';
+
+import { Notice } from './notice';
+
 import { UserAssignRole } from './userAssignRole';
 
 import { AuthData } from './authData';

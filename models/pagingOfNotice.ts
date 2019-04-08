@@ -34,9 +34,9 @@ import { News } from './news';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
-import { NewsStorage } from './newsStorage';
+import { NewsWithPicture } from './newsWithPicture';
 
-import { PagingOfNotice } from './pagingOfNotice';
+import { NewsStorage } from './newsStorage';
 
 import { Notice } from './notice';
 
@@ -57,10 +57,45 @@ import { StaticPageStorage } from './staticPageStorage';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class NewsWithPicture extends News{
+export class PagingOfNotice {
 
     /**
      * 
      */
-    pictureUrl? : string;
+    skip? : number;
+
+    /**
+     * 
+     */
+    take? : number;
+
+    /**
+     * 
+     */
+    totalCount? : number;
+
+    /**
+     * 
+     */
+    currentPageIndex? : number;
+
+    /**
+     * 
+     */
+    totalPageCount? : number;
+
+    /**
+     * 
+     */
+    hasPreviousPage? : boolean;
+
+    /**
+     * 
+     */
+    hasNextPage? : boolean;
+
+    /**
+     * 
+     */
+    result? : Notice[];
 }

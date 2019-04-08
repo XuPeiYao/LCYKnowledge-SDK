@@ -34,11 +34,11 @@ import { News } from './news';
 
 import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
+import { NewsWithPicture } from './newsWithPicture';
+
 import { NewsStorage } from './newsStorage';
 
 import { PagingOfNotice } from './pagingOfNotice';
-
-import { Notice } from './notice';
 
 import { Role } from './role';
 
@@ -57,10 +57,45 @@ import { StaticPageStorage } from './staticPageStorage';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
-export class NewsWithPicture extends News{
+export class Notice {
 
     /**
      * 
      */
-    pictureUrl? : string;
+    id? : string;
+
+    /**
+     * 
+     */
+    sourceUserId? : string;
+
+    /**
+     * 
+     */
+    targetUserId? : string;
+
+    /**
+     * 
+     */
+    type? : string;
+
+    /**
+     * 
+     */
+    articleId? : number;
+
+    /**
+     * 
+     */
+    commitId? : number;
+
+    /**
+     * 
+     */
+    time? : number;
+
+    /**
+     * 
+     */
+    isReaded? : boolean;
 }

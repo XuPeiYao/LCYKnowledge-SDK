@@ -18,6 +18,8 @@ export * from './news';
 export * from './pagingOfNewsWithPicture';
 export * from './newsWithPicture';
 export * from './newsStorage';
+export * from './pagingOfNotice';
+export * from './notice';
 export * from './role';
 export * from './userAssignRole';
 export * from './authData';

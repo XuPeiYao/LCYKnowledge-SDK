@@ -36,6 +36,8 @@ import { PagingOfNewsWithPicture } from './pagingOfNewsWithPicture';
 
 import { NewsWithPicture } from './newsWithPicture';
 
+import { NewsStorage } from './newsStorage';
+
 import { PagingOfNotice } from './pagingOfNotice';
 
 import { Notice } from './notice';
@@ -59,47 +61,10 @@ import { PagingOfUser } from './pagingOfUser';
 import { UserLevelName } from './userLevelName';
 
 import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
-
-import { UserBaseDataWithScore } from './userBaseDataWithScore';
-export class NewsStorage {
+export class UserBaseDataWithScore extends UserBaseData{
 
     /**
      * 
      */
-    id? : string;
-
-    /**
-     * 
-     */
-    newsId? : number;
-
-    /**
-     * 
-     */
-    fileName? : string;
-
-    /**
-     * 
-     */
-    objectName? : string;
-
-    /**
-     * 
-     */
-    type? : string;
-
-    /**
-     * 
-     */
-    time? : number;
-
-    /**
-     * 
-     */
-    size? : number;
-
-    /**
-     * 網址
-     */
-    url? : string;
+    score? : number;
 }

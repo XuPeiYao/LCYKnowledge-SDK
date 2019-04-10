@@ -57,6 +57,10 @@ import { StaticPageStorage } from './staticPageStorage';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
+
+import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
+
+import { UserBaseDataWithScore } from './userBaseDataWithScore';
 export class CommitStorage {
 
     /**

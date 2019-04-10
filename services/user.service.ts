@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, CommitStorage, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNotice, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNotice, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -311,7 +311,7 @@ export class UserService {
      * 取得值星使用者列表
      *
      */
-    listStarUsers(        ): Observable<User[]> {
+    listStarUsers(        ): Observable<UserBaseData[]> {
         let url = '/api/User/stars';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
@@ -319,7 +319,7 @@ export class UserService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<User[]>(
+        return this.http.get<UserBaseData[]>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -333,12 +333,15 @@ export class UserService {
     /**
      * 取得使用者積分排行分頁結果
      *
+     * @param keyword 關鍵字
      * @param startTime 起始時間
      * @param endTime 結束時間
      * @param offset 起始索引
      * @param limit 取得筆數
      */
     listUserRank(
+        keyword?: string,
+
         startTime?: number,
 
         endTime?: number,
@@ -346,10 +349,14 @@ export class UserService {
         offset: number=0,
 
         limit: number=10
-        ): Observable<PagingOfUser> {
+        ): Observable<PagingOfUserBaseDataWithScore> {
         let url = '/api/User/ranks';
         const queryList = [];
 
+        if (keyword !== null && keyword !== undefined) {
+            queryList.push('keyword=' + encodeURIComponent(keyword.toString()));
+        }
+    
         if (startTime !== null && startTime !== undefined) {
             queryList.push('startTime=' + encodeURIComponent(startTime.toString()));
         }
@@ -370,7 +377,7 @@ export class UserService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.get<PagingOfUser>(
+        return this.http.get<PagingOfUserBaseDataWithScore>(
             url,
             Config.defaultOptions
         ).pipe(

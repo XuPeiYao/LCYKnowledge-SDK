@@ -16,8 +16,6 @@ import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
 
-import { CommitStorage } from './commitStorage';
-
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -25,6 +23,8 @@ import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
 import { CommitWithScore } from './commitWithScore';
 
 import { CommitScoreCount } from './commitScoreCount';
+
+import { CommitStorage } from './commitStorage';
 
 import { PagingOfLogin } from './pagingOfLogin';
 
@@ -57,6 +57,10 @@ import { PagingOfStaticPage } from './pagingOfStaticPage';
 import { StaticPageStorage } from './staticPageStorage';
 
 import { UserLevelName } from './userLevelName';
+
+import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
+
+import { UserBaseDataWithScore } from './userBaseDataWithScore';
 export class PagingOfUser {
 
     /**

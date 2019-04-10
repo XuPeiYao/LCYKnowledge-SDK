@@ -14,8 +14,6 @@ import { UserBaseData } from './userBaseData';
 
 import { ArticleStorage } from './articleStorage';
 
-import { CommitStorage } from './commitStorage';
-
 import { PagingOfCommitWithScoreAndUserState } from './pagingOfCommitWithScoreAndUserState';
 
 import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
@@ -23,6 +21,8 @@ import { CommitWithScoreAndUserState } from './commitWithScoreAndUserState';
 import { CommitWithScore } from './commitWithScore';
 
 import { CommitScoreCount } from './commitScoreCount';
+
+import { CommitStorage } from './commitStorage';
 
 import { PagingOfLogin } from './pagingOfLogin';
 
@@ -57,6 +57,10 @@ import { StaticPageStorage } from './staticPageStorage';
 import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
+
+import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
+
+import { UserBaseDataWithScore } from './userBaseDataWithScore';
 export class Commit {
 
     /**
@@ -103,9 +107,4 @@ export class Commit {
      * 
      */
     actorUser? : User;
-
-    /**
-     * 
-     */
-    commitStorage? : CommitStorage[];
 }

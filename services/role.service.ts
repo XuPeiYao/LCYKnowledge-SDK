@@ -323,4 +323,50 @@ export class RoleService {
           })
         );
     }
+    
+    /**
+     * 目前使用者是否可進入後台
+     *
+     */
+    currentUserCanEnterBackstage(        ): Observable<boolean> {
+        let url = '/api/Role/policy/canEnterBackstage';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<boolean>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得目前使用者擁有的作用中後台權限列表
+     *
+     */
+    getCurrentUserBackstagePolicies(        ): Observable<string[]> {
+        let url = '/api/Role/policy/backstage';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<string[]>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
     }

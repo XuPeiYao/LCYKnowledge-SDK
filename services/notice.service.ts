@@ -14,6 +14,29 @@ export class NoticeService {
 
 
     /**
+     * 是否存在未讀通知
+     *
+     */
+    existsUnReaded(        ): Observable<boolean> {
+        let url = '/api/Notice/ExistsUnReaded';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<boolean>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 將通知設為已讀
      *
      * @param noticeId 
@@ -50,18 +73,11 @@ export class NoticeService {
     /**
      * 將全部通知設為已讀
      *
-     * @param noticeId 
      */
-    setAllReaded(
-        noticeId?: string
-        ): Observable<void> {
+    setAllReaded(        ): Observable<void> {
         let url = '/api/Notice/readed';
         const queryList = [];
-
-        if (noticeId !== null && noticeId !== undefined) {
-            queryList.push('noticeId=' + encodeURIComponent(noticeId.toString()));
-        }
-            window['lastRequestTime'] = new Date().getTime();
+        window['lastRequestTime'] = new Date().getTime();
         if(queryList.length > 0){
             url += '?'+ queryList.join('&');
         }

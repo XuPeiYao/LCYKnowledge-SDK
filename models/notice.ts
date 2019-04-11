@@ -38,7 +38,9 @@ import { NewsWithPicture } from './newsWithPicture';
 
 import { NewsStorage } from './newsStorage';
 
-import { PagingOfNotice } from './pagingOfNotice';
+import { PagingOfNoticeWithUserBaseData } from './pagingOfNoticeWithUserBaseData';
+
+import { NoticeWithUserBaseData } from './noticeWithUserBaseData';
 
 import { Role } from './role';
 

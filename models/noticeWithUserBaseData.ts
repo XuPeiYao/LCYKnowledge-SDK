@@ -1,4 +1,6 @@
-﻿import { User } from './user';
+﻿import { Article } from './article';
+
+import { User } from './user';
 
 import { ValueInfo } from './valueInfo';
 
@@ -38,8 +40,6 @@ import { NewsStorage } from './newsStorage';
 
 import { PagingOfNoticeWithUserBaseData } from './pagingOfNoticeWithUserBaseData';
 
-import { NoticeWithUserBaseData } from './noticeWithUserBaseData';
-
 import { Notice } from './notice';
 
 import { Role } from './role';
@@ -63,55 +63,10 @@ import { UserLevelName } from './userLevelName';
 import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
 
 import { UserBaseDataWithScore } from './userBaseDataWithScore';
-export class Article {
+export class NoticeWithUserBaseData extends Notice{
 
     /**
      * 
      */
-    id? : number;
-
-    /**
-     * 
-     */
-    title? : string;
-
-    /**
-     * 
-     */
-    tags? : string[];
-
-    /**
-     * 
-     */
-    authorUserId? : string;
-
-    /**
-     * 
-     */
-    contentType? : string;
-
-    /**
-     * 
-     */
-    content? : string;
-
-    /**
-     * 
-     */
-    createTime? : number;
-
-    /**
-     * 
-     */
-    modifyTime? : number;
-
-    /**
-     * 
-     */
-    state? : string;
-
-    /**
-     * 
-     */
-    authorUser? : User;
+    sourceUser? : UserBaseData;
 }

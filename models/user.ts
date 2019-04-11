@@ -36,7 +36,9 @@ import { NewsWithPicture } from './newsWithPicture';
 
 import { NewsStorage } from './newsStorage';
 
-import { PagingOfNotice } from './pagingOfNotice';
+import { PagingOfNoticeWithUserBaseData } from './pagingOfNoticeWithUserBaseData';
+
+import { NoticeWithUserBaseData } from './noticeWithUserBaseData';
 
 import { Notice } from './notice';
 
@@ -72,6 +74,11 @@ export class User {
      * 稱號圖片網址
      */
     levelImageUrl? : string;
+
+    /**
+     * 登入方式 LINE、GOOGLE、FACEBOOK、PASSWORD
+     */
+    provider? : string;
 
     /**
      * 

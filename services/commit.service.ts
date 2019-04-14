@@ -116,7 +116,7 @@ export class CommitService {
 
         endTime?: number,
 
-        state?: ('Blocked' | 'Publish' | 'Draft'),
+        state: ('Blocked' | 'Publish' | 'Draft')="Publish",
 
         order: ('Time_NewFirst' | 'Time_OldFirst' | 'Score_HighFirst' | 'Score_LowFirst')="Score_HighFirst",
 
@@ -533,7 +533,7 @@ export class CommitService {
     /**
      * 給予分數
      *
-     * @param commitId 文章唯一識別號
+     * @param commitId 回覆唯一識別號
      */
     addScore(
         commitId: number
@@ -567,7 +567,7 @@ export class CommitService {
     /**
      * 收回分數
      *
-     * @param commitId 文章唯一識別號
+     * @param commitId 回覆唯一識別號
      */
     removeScore(
         commitId: number

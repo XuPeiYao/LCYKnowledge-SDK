@@ -157,6 +157,76 @@ export class RoleService {
     }
     
     /**
+     * 建立新的角色並同時上傳圖示
+     *
+     * @param role 使用者角色物件JSON字串
+     * @param file 圖示檔案
+     */
+    createWithImage(
+        role?: string,
+
+        file?: File
+        ): Observable<Role> {
+        let url = '/api/Role/createWithImage';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        const formData = new FormData();
+
+        formData.append('role', role);
+        
+        formData.append('file', file);
+                return this.http.post<Role>(
+            url,
+            formData,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 更新角色圖示
+     *
+     * @param roleId 角色唯一識別號
+     * @param file 
+     */
+    updateImage(
+        roleId: string,
+
+        file?: File
+        ): Observable<Role> {
+        let url = '/api/Role/{roleId}/image';
+
+        url = url.replace('{roleId}', (roleId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        const formData = new FormData();
+
+        formData.append('file', file);
+                return this.http.put<Role>(
+            url,
+            formData,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 更新角色排序
      *
      * @param roleIds 依照順序排列的角色唯一識別號
@@ -329,6 +399,29 @@ export class RoleService {
      *
      */
     currentUserCanEnterBackstage(        ): Observable<boolean> {
+        let url = '/api/Role/policy/current/canEnterBackstage';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<boolean>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 目前使用者是否可進入後台
+     *
+     */
+    currentUserCanEnterBackstage2(        ): Observable<boolean> {
         let url = '/api/Role/policy/canEnterBackstage';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
@@ -337,6 +430,29 @@ export class RoleService {
         }
 
         return this.http.get<boolean>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得目前使用者擁有的作用中後台權限列表
+     *
+     */
+    getCurrentUserBackstagePoliciesAll(        ): Observable<string[]> {
+        let url = '/api/Role/policy/current/backstage';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<string[]>(
             url,
             Config.defaultOptions
         ).pipe(

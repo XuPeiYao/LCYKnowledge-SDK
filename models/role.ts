@@ -94,4 +94,9 @@ export class Role {
      * 
      */
     isStar? : boolean;
+
+    /**
+     * 
+     */
+    objectName? : string;
 }

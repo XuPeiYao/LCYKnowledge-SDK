@@ -66,6 +66,11 @@ import { UserBaseDataWithScore } from './userBaseDataWithScore';
 export class Role {
 
     /**
+     * 網址
+     */
+    url? : string;
+
+    /**
      * 
      */
     id? : string;

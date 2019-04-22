@@ -113,5 +113,10 @@ export class Article {
     /**
      * 
      */
+    reason? : string;
+
+    /**
+     * 
+     */
     authorUser? : User;
 }

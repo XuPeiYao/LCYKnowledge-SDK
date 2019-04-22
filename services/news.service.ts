@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
 import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
@@ -36,7 +36,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -64,7 +64,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -136,7 +136,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -168,7 +168,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -200,7 +200,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -223,7 +223,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -246,7 +246,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -281,7 +281,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -325,7 +325,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -358,7 +358,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -391,7 +391,7 @@ export class NewsService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
 import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
@@ -36,7 +36,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -64,7 +64,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -87,7 +87,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -101,7 +101,7 @@ export class ArticleService {
      * @param endTime 結束時間
      * @param summaryLength 摘要長度
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
-<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>AuditedHidden</td><td>已審核但隱藏</td><td>文章審核通過但隱藏</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      * @param order 排序
      * @param offset 起始索引
      * @param limit 取得筆數
@@ -117,7 +117,7 @@ export class ArticleService {
 
         summaryLength: number=120,
 
-        state: ('Audited' | 'Unaudited' | 'Reject' | 'Draft')="Audited",
+        state: ('Audited' | 'AuditedHidden' | 'Unaudited' | 'Reject' | 'Draft')="Audited",
 
         order: ('Time_NewFirst' | 'Time_OldFirst' | 'CommitCount_MassFirst' | 'CommitCount_LessFirst')="Time_NewFirst",
 
@@ -178,7 +178,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -210,7 +210,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -242,7 +242,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -252,6 +252,7 @@ export class ArticleService {
      *
      * @param articleId 文章唯一識別號
      * @param state 狀態
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>AuditedHidden</td><td>已審核但隱藏</td><td>文章審核通過但隱藏</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      */
     changeState(
         articleId: number,
@@ -281,7 +282,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -304,7 +305,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -327,7 +328,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -350,7 +351,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -373,7 +374,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -401,7 +402,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -435,7 +436,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -463,7 +464,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -475,7 +476,7 @@ export class ArticleService {
      * @param startTime 起始時間
      * @param endTime 結束時間
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
-<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>AuditedHidden</td><td>已審核但隱藏</td><td>文章審核通過但隱藏</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      */
     listTags(
         keyword?: string,
@@ -484,7 +485,7 @@ export class ArticleService {
 
         endTime?: number,
 
-        state: ('Audited' | 'Unaudited' | 'Reject' | 'Draft')="Audited"
+        state: ('Audited' | 'AuditedHidden' | 'Unaudited' | 'Reject' | 'Draft')="Audited"
         ): Observable<ArticleTagWithCount[]> {
         let url = '/api/Article/tags';
         const queryList = [];
@@ -515,7 +516,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -559,7 +560,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -642,7 +643,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -677,7 +678,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -691,7 +692,7 @@ export class ArticleService {
      * @param endTime 結束時間
      * @param summaryLength 摘要長度
      * @param state 狀態
-<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
+<table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Audited</td><td>已審核</td><td>文章審核通過即公開</td></tr><tr><td>AuditedHidden</td><td>已審核但隱藏</td><td>文章審核通過但隱藏</td></tr><tr><td>Unaudited</td><td>未審核</td><td>當文章送出時切換到此狀態等候審核</td></tr><tr><td>Reject</td><td>駁回</td><td>當審核未通過將設為此狀態</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr></tbody></table>
      * @param order 排序
      * @param offset 起始索引
      * @param limit 取得筆數
@@ -707,7 +708,7 @@ export class ArticleService {
 
         summaryLength: number=120,
 
-        state?: ('Audited' | 'Unaudited' | 'Reject' | 'Draft'),
+        state?: ('Audited' | 'AuditedHidden' | 'Unaudited' | 'Reject' | 'Draft'),
 
         order: ('Time_NewFirst' | 'Time_OldFirst' | 'CommitCount_MassFirst' | 'CommitCount_LessFirst')="Time_NewFirst",
 
@@ -768,7 +769,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -803,7 +804,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -847,7 +848,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -880,7 +881,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }
@@ -913,7 +914,7 @@ export class ArticleService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return null;
+            return throwError(error);
           })
         );
     }

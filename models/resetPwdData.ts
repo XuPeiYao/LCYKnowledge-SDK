@@ -10,6 +10,8 @@ import { PagingOfArticleWithUserState } from './pagingOfArticleWithUserState';
 
 import { ArticleWithUserState } from './articleWithUserState';
 
+import { UserBaseData } from './userBaseData';
+
 import { ArticleStorage } from './articleStorage';
 
 import { Commit } from './commit';
@@ -60,30 +62,23 @@ import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
 
-import { ResetPwdData } from './resetPwdData';
-
 import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
 
 import { UserBaseDataWithScore } from './userBaseDataWithScore';
-export class UserBaseData {
+export class ResetPwdData {
 
     /**
      * 
      */
-    id? : string;
+    pwd? : string;
 
     /**
      * 
      */
-    name? : string;
+    repeatPwd? : string;
 
     /**
      * 
      */
-    pictureUrl? : string;
-
-    /**
-     * 
-     */
-    levelImageUrl? : string;
+    token? : string;
 }

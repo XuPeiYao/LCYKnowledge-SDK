@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
-import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
+import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, ResetPwdData, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
 import clone from 'clone';
 
 @Injectable({
@@ -299,6 +299,72 @@ export class UserService {
         return this.http.get<UserLevelName>(
             url,
             Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return throwError(error);
+          })
+        );
+    }
+    
+    /**
+     * 寄送 忘記密碼 的Email
+     *
+     * @param email 
+     */
+    sendForgetPwdEmail(
+        email: string
+        ): Observable<Blob> {
+        let url = '/api/User/{email}/sendForgetPwdEmail';
+
+        url = url.replace('{email}', (email).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        let tmpOptions = clone(Config.defaultOptions);
+
+
+        return this.http.post<Blob>(
+            url,
+			
+            {}
+			,
+            tmpOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return throwError(error);
+          })
+        );
+    }
+    
+    /**
+     * 重設密碼
+     *
+     * @param data 
+     */
+    resetPwd(
+        data: ResetPwdData
+        ): Observable<Blob> {
+        let url = '/api/User/resetPwd';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        let tmpOptions = clone(Config.defaultOptions);
+
+
+        return this.http.post<Blob>(
+            url,
+			
+            data
+			,
+            tmpOptions
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});

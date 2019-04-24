@@ -30,5 +30,6 @@ export * from './pagingOfStaticPage';
 export * from './staticPageStorage';
 export * from './pagingOfUser';
 export * from './userLevelName';
+export * from './resetPwdData';
 export * from './pagingOfUserBaseDataWithScore';
 export * from './userBaseDataWithScore';

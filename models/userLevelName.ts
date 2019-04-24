@@ -60,6 +60,8 @@ import { StaticPageStorage } from './staticPageStorage';
 
 import { PagingOfUser } from './pagingOfUser';
 
+import { ResetPwdData } from './resetPwdData';
+
 import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
 
 import { UserBaseDataWithScore } from './userBaseDataWithScore';

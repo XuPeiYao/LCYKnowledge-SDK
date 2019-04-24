@@ -62,6 +62,8 @@ import { PagingOfUser } from './pagingOfUser';
 
 import { UserLevelName } from './userLevelName';
 
+import { ResetPwdData } from './resetPwdData';
+
 import { PagingOfUserBaseDataWithScore } from './pagingOfUserBaseDataWithScore';
 export class UserBaseDataWithScore extends UserBaseData{
 

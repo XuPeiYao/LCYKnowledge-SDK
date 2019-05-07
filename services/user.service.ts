@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
 import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, ResetPwdData, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
@@ -66,7 +66,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -98,7 +98,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -130,7 +130,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -158,7 +158,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -181,7 +181,64 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得目前使用者自訂設定，如未登入則回傳null
+     *
+     */
+    getCurrentUserConfig(        ): Observable<string> {
+        let url = '/api/User/current/config';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<string>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 更新使用者自訂設定
+     *
+     * @param config 使用者自訂設定
+     */
+    updateCurrentUserConfig(
+        config: string
+        ): Observable<string> {
+        let url = '/api/User/current/config';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        let tmpOptions = clone(Config.defaultOptions);
+
+
+        tmpOptions.headers['Content-Type'] = 'application/json';
+			
+        return this.http.post<string>(
+            url,
+			JSON.stringify(
+            config
+			),
+            tmpOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
           })
         );
     }
@@ -209,35 +266,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
-          })
-        );
-    }
-    
-    /**
-     * 刪除指定使用者
-     *
-     * @param userId 唯一識別號
-     */
-    delete(
-        userId: string
-        ): Observable<void> {
-        let url = '/api/User/{userId}';
-
-        url = url.replace('{userId}', (userId).toString());
-            const queryList = [];
-        window['lastRequestTime'] = new Date().getTime();
-        if(queryList.length > 0){
-            url += '?'+ queryList.join('&');
-        }
-
-        return this.http.delete<void>(
-            url,
-            Config.defaultOptions
-        ).pipe(
-          catchError((error: any, caught: Observable<any>) => {
-            Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -274,7 +303,35 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 刪除指定使用者
+     *
+     * @param deletedUserId 唯一識別號
+     */
+    delete(
+        deletedUserId: string
+        ): Observable<void> {
+        let url = '/api/User/{deletedUserId}';
+
+        url = url.replace('{deletedUserId}', (deletedUserId).toString());
+            const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.delete<void>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
           })
         );
     }
@@ -302,7 +359,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -336,7 +393,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -368,7 +425,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -391,7 +448,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -449,7 +506,7 @@ export class UserService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }

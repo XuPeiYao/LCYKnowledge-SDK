@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Config } from '../config';
 import { Article, User, ValueInfo, ArticleTagWithCount, PagingOfArticleWithUserState, ArticleWithUserState, UserBaseData, ArticleStorage, Commit, PagingOfCommitWithScoreAndUserState, CommitWithScoreAndUserState, CommitWithScore, CommitScoreCount, CommitStorage, PagingOfLogin, Login, News, PagingOfNewsWithPicture, NewsWithPicture, NewsStorage, PagingOfNoticeWithUserBaseData, NoticeWithUserBaseData, Notice, Role, UserAssignRole, AuthData, LoginData, StaticPage, PagingOfStaticPage, StaticPageStorage, PagingOfUser, UserLevelName, ResetPwdData, PagingOfUserBaseDataWithScore, UserBaseDataWithScore } from '../models';
@@ -36,7 +36,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -64,7 +64,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -87,7 +87,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -119,7 +119,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -151,7 +151,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -186,7 +186,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }
@@ -221,7 +221,7 @@ export class UserLevelNameService {
         ).pipe(
           catchError((error: any, caught: Observable<any>) => {
             Config.onError.next({error: error, caught: caught});
-            return throwError(error);
+            return null;
           })
         );
     }

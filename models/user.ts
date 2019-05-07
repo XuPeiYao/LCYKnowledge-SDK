@@ -116,4 +116,9 @@ export class User {
      * 
      */
     modifyTime? : number;
+
+    /**
+     * 
+     */
+    config? : string;
 }

@@ -108,6 +108,11 @@ export class Article {
     modifyTime? : number;
 
     /**
+     *
+     */
+    lastStateChangeTime? : number;
+    
+    /**
      * 
      */
     state? : string;

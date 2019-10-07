@@ -48,7 +48,7 @@ export class ArticleService {
      */
     delete(
         articleId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Article/{articleId}';
 
         url = url.replace('{articleId}', (articleId).toString());
@@ -58,7 +58,7 @@ export class ArticleService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -414,7 +414,7 @@ export class ArticleService {
      */
     addFavorite(
         articleId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Article/{articleId}/favorite';
 
         url = url.replace('{articleId}', (articleId).toString());
@@ -427,7 +427,7 @@ export class ArticleService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.post<void>(
+        return this.http.post<any>(
             url,
 			
             {}
@@ -448,7 +448,7 @@ export class ArticleService {
      */
     removeFavorite(
         articleId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Article/{articleId}/favorite';
 
         url = url.replace('{articleId}', (articleId).toString());
@@ -458,7 +458,7 @@ export class ArticleService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -896,7 +896,7 @@ export class ArticleService {
         articleId: number,
 
         storageId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Article/{articleId}/storage/{storageId}';
 
         url = url.replace('{articleId}', (articleId).toString());
@@ -908,7 +908,7 @@ export class ArticleService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

@@ -48,7 +48,7 @@ export class NewsService {
      */
     delete(
         newsId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/News/{newsId}';
 
         url = url.replace('{newsId}', (newsId).toString());
@@ -58,7 +58,7 @@ export class NewsService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -373,7 +373,7 @@ export class NewsService {
         newsId: number,
 
         storageId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/News/{newsId}/storage/{storageId}';
 
         url = url.replace('{newsId}', (newsId).toString());
@@ -385,7 +385,7 @@ export class NewsService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

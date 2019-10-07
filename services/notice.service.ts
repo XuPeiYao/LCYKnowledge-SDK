@@ -43,7 +43,7 @@ export class NoticeService {
      */
     setReaded(
         noticeId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Notice/{noticeId}/readed';
 
         url = url.replace('{noticeId}', (noticeId).toString());
@@ -56,7 +56,7 @@ export class NoticeService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.put<void>(
+        return this.http.put<any>(
             url,
 			
             {}
@@ -74,7 +74,7 @@ export class NoticeService {
      * 將全部通知設為已讀
      *
      */
-    setAllReaded(        ): Observable<void> {
+    setAllReaded(        ): Observable<any> {
         let url = '/api/Notice/readed';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
@@ -85,7 +85,7 @@ export class NoticeService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.put<void>(
+        return this.http.put<any>(
             url,
 			
             {}

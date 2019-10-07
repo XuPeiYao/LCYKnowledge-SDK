@@ -315,7 +315,7 @@ export class UserService {
      */
     delete(
         deletedUserId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/User/{deletedUserId}';
 
         url = url.replace('{deletedUserId}', (deletedUserId).toString());
@@ -325,7 +325,7 @@ export class UserService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -420,6 +420,63 @@ export class UserService {
             url,
 			
             data
+			,
+            tmpOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 取得電子報訂閱狀態
+     *
+     */
+    getSubscription(        ): Observable<boolean> {
+        let url = '/api/User/subscription';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<boolean>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 更新電子報訂閱狀態
+     *
+     * @param value 
+     */
+    updateSubscription(
+        value: boolean
+        ): Observable<boolean> {
+        let url = '/api/User/subscription';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        let tmpOptions = clone(Config.defaultOptions);
+
+
+        tmpOptions.headers['Content-Type'] = 'application/json';
+			
+        return this.http.put<boolean>(
+            url,
+			
+            value
 			,
             tmpOptions
         ).pipe(

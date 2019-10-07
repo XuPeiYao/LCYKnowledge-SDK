@@ -110,5 +110,10 @@ export class Commit {
     /**
      * 
      */
+    floor? : string;
+
+    /**
+     * 
+     */
     actorUser? : User;
 }

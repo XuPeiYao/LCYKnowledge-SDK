@@ -48,7 +48,7 @@ export class UserLevelNameService {
      */
     delete(
         userLevelId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/UserLevelName/{userLevelId}';
 
         url = url.replace('{userLevelId}', (userLevelId).toString());
@@ -58,7 +58,7 @@ export class UserLevelNameService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

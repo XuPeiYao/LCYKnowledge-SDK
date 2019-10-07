@@ -30,6 +30,6 @@ import {
     UserLevelNameService
   ]
 })
-export class lCYModule {
+export class LCYModule {
 
 }

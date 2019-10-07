@@ -48,7 +48,7 @@ export class RoleService {
      */
     delete(
         roleId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Role/{roleId}';
 
         url = url.replace('{roleId}', (roleId).toString());
@@ -58,7 +58,7 @@ export class RoleService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -233,7 +233,7 @@ export class RoleService {
      */
     sort(
         roleIds: string[]
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Role/sort';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
@@ -244,7 +244,7 @@ export class RoleService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.put<void>(
+        return this.http.put<any>(
             url,
 			
             roleIds
@@ -295,7 +295,7 @@ export class RoleService {
      */
     assignUserRole(
         assign: UserAssignRole
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Role/assign';
         const queryList = [];
         window['lastRequestTime'] = new Date().getTime();
@@ -306,7 +306,7 @@ export class RoleService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.post<void>(
+        return this.http.post<any>(
             url,
 			
             assign
@@ -327,7 +327,7 @@ export class RoleService {
      */
     unassignUserRole(
         assignId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Role/assign/{assignId}';
 
         url = url.replace('{assignId}', (assignId).toString());
@@ -337,7 +337,7 @@ export class RoleService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

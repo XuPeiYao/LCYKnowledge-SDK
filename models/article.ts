@@ -108,11 +108,6 @@ export class Article {
     modifyTime? : number;
 
     /**
-     *
-     */
-    lastStateChangeTime? : number;
-    
-    /**
      * 
      */
     state? : string;
@@ -121,6 +116,11 @@ export class Article {
      * 
      */
     reason? : string;
+
+    /**
+     * 
+     */
+    lastStateChangeTime? : number;
 
     /**
      * 

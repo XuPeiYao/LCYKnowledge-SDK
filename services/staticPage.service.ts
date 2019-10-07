@@ -48,7 +48,7 @@ export class StaticPageService {
      */
     delete(
         staticPageId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/StaticPage/{staticPageId}';
 
         url = url.replace('{staticPageId}', (staticPageId).toString());
@@ -58,7 +58,7 @@ export class StaticPageService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -359,7 +359,7 @@ export class StaticPageService {
         staticPageId: string,
 
         storageId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/StaticPage/{staticPageId}/storage/{storageId}';
 
         url = url.replace('{staticPageId}', (staticPageId).toString());
@@ -371,7 +371,7 @@ export class StaticPageService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

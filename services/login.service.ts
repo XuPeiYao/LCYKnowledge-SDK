@@ -213,7 +213,7 @@ export class LoginService {
      */
     delete(
         id: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Login/{id}';
 
         url = url.replace('{id}', (id).toString());
@@ -223,7 +223,7 @@ export class LoginService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

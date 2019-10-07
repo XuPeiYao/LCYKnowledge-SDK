@@ -48,7 +48,7 @@ export class CommitService {
      */
     delete(
         commitId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Commit/{commitId}';
 
         url = url.replace('{commitId}', (commitId).toString());
@@ -58,7 +58,7 @@ export class CommitService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -538,7 +538,7 @@ export class CommitService {
      */
     addScore(
         commitId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Commit/{commitId}/score';
 
         url = url.replace('{commitId}', (commitId).toString());
@@ -551,7 +551,7 @@ export class CommitService {
         let tmpOptions = clone(Config.defaultOptions);
 
 
-        return this.http.post<void>(
+        return this.http.post<any>(
             url,
 			
             {}
@@ -572,7 +572,7 @@ export class CommitService {
      */
     removeScore(
         commitId: number
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Commit/{commitId}/score';
 
         url = url.replace('{commitId}', (commitId).toString());
@@ -582,7 +582,7 @@ export class CommitService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(
@@ -715,7 +715,7 @@ export class CommitService {
         commitId: number,
 
         storageId: string
-        ): Observable<void> {
+        ): Observable<any> {
         let url = '/api/Commit/{commitId}/storage/{storageId}';
 
         url = url.replace('{commitId}', (commitId).toString());
@@ -727,7 +727,7 @@ export class CommitService {
             url += '?'+ queryList.join('&');
         }
 
-        return this.http.delete<void>(
+        return this.http.delete<any>(
             url,
             Config.defaultOptions
         ).pipe(

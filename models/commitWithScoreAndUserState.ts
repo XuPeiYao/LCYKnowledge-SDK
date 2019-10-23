@@ -71,4 +71,9 @@ export class CommitWithScoreAndUserState extends CommitWithScore{
      * 
      */
     userGaveScore? : boolean;
+
+    /**
+     * 
+     */
+    summary? : string;
 }

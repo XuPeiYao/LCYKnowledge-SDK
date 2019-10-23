@@ -488,6 +488,65 @@ export class UserService {
     }
     
     /**
+     * 退訂網址
+     *
+     * @param subscriptionId 
+     */
+    unSubscription(
+        subscriptionId?: string
+        ): Observable<Blob> {
+        let url = '/api/User/unsubscription';
+        const queryList = [];
+
+        if (subscriptionId !== null && subscriptionId !== undefined) {
+            queryList.push('subscriptionId=' + encodeURIComponent(subscriptionId.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<Blob>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
+     * 發送電子報
+     *
+     */
+    sendSubcribeUserEmail(        ): Observable<Blob> {
+        let url = '/api/User/sendSubcribeUserEmail';
+        const queryList = [];
+        window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        let tmpOptions = clone(Config.defaultOptions);
+
+
+        return this.http.post<Blob>(
+            url,
+			
+            {}
+			,
+            tmpOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得值星使用者列表
      *
      */

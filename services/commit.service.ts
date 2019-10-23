@@ -103,6 +103,7 @@ export class CommitService {
      * @param articleIds 文章唯一識別號
      * @param startTime 起始時間
      * @param endTime 結束時間
+     * @param summaryLength 文字剖析長度
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
 <table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr><tr><td>Top</td><td>置頂</td><td>置頂</td></tr></tbody></table>
      * @param order 排序
@@ -115,6 +116,8 @@ export class CommitService {
         startTime?: number,
 
         endTime?: number,
+
+        summaryLength: number=120,
 
         state: ('Blocked' | 'Publish' | 'Draft' | 'Top')="Publish",
 
@@ -141,6 +144,10 @@ export class CommitService {
     
         if (endTime !== null && endTime !== undefined) {
             queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
+        }
+    
+        if (summaryLength !== null && summaryLength !== undefined) {
+            queryList.push('summaryLength=' + encodeURIComponent(summaryLength.toString()));
         }
     
         if (state !== null && state !== undefined) {
@@ -376,6 +383,7 @@ export class CommitService {
      * @param articleIds 文章唯一識別號
      * @param startTime 起始時間
      * @param endTime 結束時間
+     * @param summaryLength 
      * @param state 狀態，如未設定則自動複寫為Audited，但如果有管理權限則容許不過濾
 <table><thead><tr><th>值</th><th>名稱</th><th>說明</th></tr></thead><tbody><tr><td>Blocked</td><td>屏蔽</td><td>屏蔽該回應，僅限後台管理人員可見，此狀態無法進行編輯</td></tr><tr><td>Publish</td><td>發布</td><td>公開顯示</td></tr><tr><td>Draft</td><td>草稿</td><td>文章初始狀態</td></tr><tr><td>Top</td><td>置頂</td><td>置頂</td></tr></tbody></table>
      * @param order 排序
@@ -388,6 +396,8 @@ export class CommitService {
         startTime?: number,
 
         endTime?: number,
+
+        summaryLength: number=120,
 
         state?: ('Blocked' | 'Publish' | 'Draft' | 'Top'),
 
@@ -414,6 +424,10 @@ export class CommitService {
     
         if (endTime !== null && endTime !== undefined) {
             queryList.push('endTime=' + encodeURIComponent(endTime.toString()));
+        }
+    
+        if (summaryLength !== null && summaryLength !== undefined) {
+            queryList.push('summaryLength=' + encodeURIComponent(summaryLength.toString()));
         }
     
         if (state !== null && state !== undefined) {

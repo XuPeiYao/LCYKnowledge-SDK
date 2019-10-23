@@ -380,6 +380,36 @@ export class ArticleService {
     }
     
     /**
+     * 一次性API
+     *
+     * @param password 
+     */
+    firstTimeEmail(
+        password?: string
+        ): Observable<string> {
+        let url = '/api/Article/onetimeapi';
+        const queryList = [];
+
+        if (password !== null && password !== undefined) {
+            queryList.push('password=' + encodeURIComponent(password.toString()));
+        }
+            window['lastRequestTime'] = new Date().getTime();
+        if(queryList.length > 0){
+            url += '?'+ queryList.join('&');
+        }
+
+        return this.http.get<string>(
+            url,
+            Config.defaultOptions
+        ).pipe(
+          catchError((error: any, caught: Observable<any>) => {
+            Config.onError.next({error: error, caught: caught});
+            return null;
+          })
+        );
+    }
+    
+    /**
      * 取得指定文章是否已經收藏
      *
      * @param articleId 文章唯一識別號

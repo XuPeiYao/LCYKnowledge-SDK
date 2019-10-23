@@ -81,4 +81,14 @@ export class ArticleWithUserState extends Article{
      * 
      */
     pictureUrl? : string;
+
+    /**
+     * 
+     */
+    viewCount? : number;
+
+    /**
+     * 
+     */
+    viewUserCount? : number;
 }
